@@ -1,0 +1,10 @@
+<article>
+	<header>
+		<h1 class="title">Editing Resume</h1>
+		<%= link_to 'Show', @resume %> | <%= link_to 'Back', root_path %>
+	</header>
+
+	<section class="main">
+		<%= render 'form', resume: @resume %>
+	</section>
+</article>

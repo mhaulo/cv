@@ -1,0 +1,39 @@
+<article>
+	<header>
+		<h1 class="title">Portfolio: <%= @portfolio.name %></h1>
+		<%= link_to 'Edit', edit_portfolio_path(@portfolio) %> | <%= link_to 'Back', root_path %>
+	</header>
+	
+	<section class="main">
+		<div class="row">
+			<div class="eight columns">
+				<p><%= @portfolio.description %></p>
+			</div>
+			
+			<div class="four columns">
+				<% if @portfolio.picture.attached? %>
+					<%= image_tag url_for(@portfolio.picture), class: "avatar u-pull-right" %>
+				<% end %>
+			</div>
+		</div>
+		
+		<h2>Samples</h2>
+		<section>
+			<% @portfolio.samples.each do |sample| %>
+				<article>
+					<div class="row">
+						<div class="six columns">
+							<h3><%= link_to sample.title, [@portfolio, sample] %></h3>
+						</div>
+						
+						<div class="six columns">
+							<% if sample.picture.attached? %>
+								<%= image_tag url_for(sample.picture), class: "avatar u-pull-right" %>
+							<% end %>
+						</div>
+					</div>
+				</article>
+			<% end %>
+		</section>
+	</section>
+</article>

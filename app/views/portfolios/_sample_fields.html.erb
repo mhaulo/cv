@@ -1,0 +1,36 @@
+<div class="sample nested-fields">
+	<div class="row">
+		<div class="ten columns">
+			<%= f.label :sample_title %>
+			<%= f.text_field :title, class: "u-full-width" %>
+		</div>
+		
+		<div class="two columns danger">
+			<%= link_to_remove_association("remove", f) %>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="ten columns">
+			<%= f.label :picture %>
+			<%= f.file_field :picture, class: "" %>
+			<span class="u-pull-right">
+				<% if f.object.picture.attached? %>
+					<%= image_tag url_for(f.object.picture), class: "mini-avatar u-pull-right" %>
+				<% end %>
+			</span>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="ten columns">
+			<%= f.label :body %>
+			<%= f.text_area :body, class: "u-full-width" %>
+		</div>
+		
+		<div class="two columns">
+		</div>
+	</div>
+</div>
+
+<hr>

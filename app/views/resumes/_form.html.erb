@@ -1,0 +1,125 @@
+<%= form_with(model: resume, local: true) do |form| %>
+	<% if resume.errors.any? %>
+		<div id="error_explanation">
+			<h2><%= pluralize(resume.errors.count, "error") %> prohibited this resume from being saved:</h2>
+
+			<ul>
+				<% resume.errors.full_messages.each do |message| %>
+					<li><%= message %></li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+	
+	<section class="actions">
+		<div class="row">
+			<div class="eight columns">
+				<%= form.submit class: "button button-primary" %>
+			</div>
+			
+			<div class="four columns right-align">
+				<%= form.check_box :public %> <%= form.label :public, class: "inline" %>
+			</div>
+		</div>
+		
+	</section>
+
+	<section>
+		<h2>Personal information</h2>
+		
+		<div class="row">
+			<div class="six columns">
+				<%= form.label :name %>
+				<%= form.text_field :name, class: "u-full-width" %>
+			</div>
+			
+			<div class="six columns">
+				<%= form.label :email %>
+				<%= form.text_field :email, class: "u-full-width" %>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="six columns">
+				<%= form.label :phone %>
+				<%= form.text_field :phone, class: "u-full-width" %>
+			</div>
+			
+			<div class="six columns">
+				<%= form.label :picture %>
+				<%= form.file_field :picture, class: "" %>
+				<span class="u-pull-right">
+					<% if @resume.picture.attached? %>
+						<%= image_tag url_for(@resume.picture), class: "mini-avatar u-pull-right" %>
+					<% end %>
+				</span>
+			</div>
+		</div>
+	</section>
+	
+	<section>
+		<h2>Education</h2>
+		
+		<div id="academic_degrees">
+			<%= form.fields_for :academic_degrees do |f| %>
+				<%= render partial: "academic_degree_fields", locals: {f: f} %>
+			<% end %>
+		</div>
+
+		<div class="row">
+			<div class="ten columns force-height">
+			</div>
+				
+			<div class="two columns">
+				<%= link_to_add_association('Add School', form, :academic_degrees, :data => {"association-insertion-node": "#academic_degrees", "association-insertion-method": "append"}) %>
+			</div>
+		</div>
+	</section>
+	
+	<section>
+		<h2>Work Experience</h2>
+		
+		<div id="experiences">
+			<%= form.fields_for :experiences do |f| %>
+				<%= render partial: "experience_fields", locals: {f: f} %>
+			<% end %>
+		</div>
+		
+		<div class="row">
+			<div class="ten columns force-height">
+			</div>
+				
+			<div class="two columns">
+				<%= link_to_add_association('Add Employer', form, :experiences, :data => {"association-insertion-node": "#experiences", "association-insertion-method": "append"}) %>
+			</div>
+		</div>
+	</section>
+	
+	<section>
+		<h2>Skills</h2>
+		
+		<div id="skills">
+			<%= form.fields_for :skills do |f| %>
+				<%= render partial: "skill_fields", locals: {f: f} %>
+			<% end %>
+		</div>
+		
+		<div class="row">
+			<div class="ten columns force-height">
+			</div>
+				
+			<div class="two columns">
+				<%= link_to_add_association('Add Skill', form, :skills, :data => {"association-insertion-node": "#skills", "association-insertion-method": "append"}) %>
+			</div>
+		</div>
+	</section>
+	
+	<section>
+		<h2>Portfolios</h2>
+		<p>Select portfolios to be included in this resume.</p>
+		
+		<%= form.collection_check_boxes :portfolio_ids, Portfolio.all, :id, :name do |p| %>
+			<%= p.check_box %> <%= p.label class: "inline" %><br>
+		<% end %>
+	</section>
+<% end %>

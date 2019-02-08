@@ -1,0 +1,153 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require normalize
+ *= require skeleton
+ *= require_tree .
+ *= require_self
+ */
+
+@import "trix";
+
+body {
+	background: #fffaf1;
+}
+
+h1 {
+	font-size: 4.5rem;
+}
+
+h2 {
+	font-size: 3.2rem;
+}
+
+h3 {
+	font-size: 1.8rem;
+	margin-bottom: 0.1rem;
+}
+
+label {
+	color: #636363;
+}
+
+button {
+	border: inherit;
+}
+
+.right-align {
+	text-align: right;
+}
+
+.danger {
+	color: #c20000;
+	
+	a {
+		color: inherit;
+	}
+}
+
+.force-height {
+	min-height: 1px;
+}
+
+input[type="date"] {
+	height: 38px;
+	padding: 6px 10px;
+	background-color: #fff;
+	border: 1px solid #D1D1D1;
+	border-radius: 4px;
+	box-shadow: none;
+	box-sizing: border-box;
+}
+
+input[type="range"] {
+	margin-top: 8px; // Hack to get vertical alignment right
+}
+
+main {
+	margin-bottom: 2em;
+}
+
+main > article {
+	background: #fff;
+	border-radius: 5px;
+	border: 2px solid #cccccc;
+	
+	& > header {
+		background: #e4e4e4;
+		padding: 1em 4em;
+		border-bottom: 1px solid #cccccc;
+		.title {
+			margin: 0;
+		}
+	}
+	
+	.main {
+		padding: 2em 4em;
+		
+		h2 {
+			font-weight: bold;
+			font-size: 2.2rem;
+			text-transform: uppercase;
+			border-bottom: 1px solid #333;
+			margin-bottom: 1em;
+		}
+		
+		section {
+			margin-bottom: 2rem;
+		}
+		
+		article {
+			margin-bottom: 2rem;
+			border-bottom: solid 1px #f5f5f5;
+	
+			header {
+				margin-bottom: 1em;
+				font-weight: bold;
+			}
+		}
+	}
+}
+
+.rating {
+	color: #769e04;
+}
+
+.notifications {
+	text-align: center;
+	margin-top: 2em;
+	margin-bottom: 2em;
+	font-size: 1.5rem;
+	
+	.notice {
+		color: #769304;
+	}
+	
+	.alert {
+		color: #c20000;
+	}
+}
+
+img.avatar {
+	width: 120px;
+	height: auto;
+}
+
+img.mini-avatar {
+	width: 30px;
+	height: auto;
+}
+
+label.inline {
+	display: inline-block;
+	color: #333;
+}

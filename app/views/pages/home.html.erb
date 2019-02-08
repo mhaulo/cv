@@ -1,0 +1,38 @@
+<article>
+	<header>
+		<h1 class="title">Hello</h1>
+		<%= link_to "Log out", destroy_user_session_path, method: :delete %>
+	</header>
+	
+	<section class="main">
+		<h2>Resumes</h2>
+		
+		<% if @resumes.empty? %>
+			<p>You don't have any resumes yet.</p>
+		<% end %>
+			
+		<ul>
+			<% @resumes.each do |r| %>
+				<li><%= link_to r.name, r %></li>
+			<% end %>
+		</ul>
+		
+		<p><%= link_to "Create resume", new_resume_path, class: "button" %></p>
+		
+		<h2>Portfolios</h2>
+		
+		<% if @portfolios.empty? %>
+			<p>You don't have any portfolios yet.</p>
+		<% end %>
+		
+		<ul>
+			<% @portfolios.each do |p| %>
+				<li><%= link_to p.name, p %></li>
+			<% end %>
+		</ul>
+		
+		<p><%= link_to "Create portfolio", new_portfolio_path, class: "button" %></p>
+		
+	</section>
+</article>
+

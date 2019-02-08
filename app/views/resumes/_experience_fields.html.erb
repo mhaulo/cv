@@ -1,0 +1,42 @@
+<div class="experience nested-fields">
+	<div class="row">
+		<div class="five columns">
+			<%= f.label :title %>
+			<%= f.text_field :title, class: "u-full-width" %>
+		</div>
+		
+		<div class="five columns">
+			<%= f.label :name %>
+			<%= f.text_field :name, class: "u-full-width" %>
+		</div>
+		
+		<div class="two columns danger">
+			<%= link_to_remove_association("remove", f) %>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="five columns">
+			<%= f.label :started_at %>
+			<%= f.date_field :started_at, class: "u-full-width" %>
+		</div>
+		
+		<div class="five columns">
+			<%= f.label :ended_at %>
+			<%= f.date_field :ended_at, class: "u-full-width" %>
+		</div>
+		
+		<div class="two columns">
+			
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="ten columns">
+			<%= f.label :description %>
+			<%= f.text_area :body, rows: 5, class: "u-full-width" %>
+		</div>
+	</div>
+</div>
+
+<hr>

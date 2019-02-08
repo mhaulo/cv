@@ -1,0 +1,130 @@
+<article>
+	<header>
+		<h1 class="title">Resume</h1>
+		
+		<% if user_signed_in? and @resume.user == current_user %>
+			<%= link_to 'Edit', edit_resume_path(@resume) %> | <%= link_to 'Back', root_path %>
+		<% end %>
+	</header>
+	
+	<section class="main">
+		<% if user_signed_in? and @resume.user == current_user %>
+			<p><strong>Status:</strong> <%= resume_status_text(@resume) %></p>
+		<% end %>
+	
+		<section>
+			<h2>Personal information</h2>
+			
+			<div class="row">
+				<div class="six columns">
+					<p>
+						<strong>Name:</strong>
+						<%= @resume.name %>
+					</p>
+
+					<p>
+						<strong>Email:</strong>
+						<%= @resume.email %>
+					</p>
+
+					<p>
+						<strong>Phone:</strong>
+						<%= @resume.phone %>
+					</p>
+				</div>
+				
+				<div class="six columns">
+					<% if @resume.picture.attached? %>
+						<%= image_tag url_for(@resume.picture), class: "avatar u-pull-right" %>
+					<% end %>
+				</div>
+			</div>
+		</section>
+		
+		<section>
+			<h2>Education</h2>
+			
+			<% @academic_degrees.each do |a| %>
+				<article>
+					<header>
+						<h3><%= a.school %></h3>
+						<time datetime="<%= a.ended_at.strftime "%Y" %>"><%= a.ended_at.strftime "%Y" %></time>
+					
+						<% unless a.title.blank? %>
+							– <%= a.title %>
+						<% end %>
+					</header>
+					
+					<p><%= a.description %></p>
+				</article>
+			<% end %>
+		</section>
+		
+		<section>
+			<h2>Work Experience</h2>
+			
+			<% @experiences.each do |r| %>
+				<article>
+					<header>
+						<h3><%= r.name %></h3>
+						<time datetime="<%= month_and_year(r.started_at) %>"><%= month_and_year(r.started_at) %></time>
+						–
+						<time datetime="<%= month_and_year(r.ended_at) %>"><%= month_and_year(r.ended_at) %></time>
+					</header>
+					
+					<p><%= r.body %></p>
+				</article>
+			<% end %>
+		</section>
+		
+		<section>
+			<h2>Skills</h2>
+			
+			<% @skills.each do |s| %>
+				<article>
+					<header>
+						<h3>
+							<%= s.name %>
+							
+							<% if s.rating > 0 %>
+								– <span class="rating"><%= rating_stars(s.rating) %></span>
+							<% end %>
+						</h3>
+					</header>
+					
+					<p><%= s.description %></p>
+				</article>
+			<% end %>
+		</section>
+		
+		<section>
+			<h2>Portfolios attached to this resume</h2>
+			
+			<% @portfolios.each do |portfolio| %>
+				<% portfolio.samples.each do |s| %>
+					<article>
+						<header>
+							<h3><%= s.title %></h3>
+						</header>
+						
+						<div class="row">
+							<div class="three columns">
+								<% if s.picture.attached? %>
+									<%= image_tag url_for(s.picture), class: "avatar" %>
+								<% end %>
+							</div>
+							
+							<div class="nine columns">
+								<% s.body %>
+							</div>
+						</div>
+					</article>
+				<% end %>
+			<% end %>
+		</section>
+	</section>
+	
+	<footer>
+		
+	</footer>
+</article>

@@ -1,0 +1,66 @@
+<%= form_with(model: portfolio, local: true) do |form| %>
+	<% if portfolio.errors.any? %>
+		<div id="error_explanation">
+		<h2><%= pluralize(portfolio.errors.count, "error") %> prohibited this portfolio from being saved:</h2>
+
+		<ul>
+		<% portfolio.errors.full_messages.each do |message| %>
+			<li><%= message %></li>
+		<% end %>
+		</ul>
+		</div>
+	<% end %>
+
+	<section>
+		<div class="row">
+			<div class="twelve columns">
+				<%= form.label :portfolio_name %>
+				<%= form.text_field :name, class: "u-full-width" %>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="twelve columns">
+				<%= form.label :picture %>
+				<%= form.file_field :picture, class: "" %>
+				<span class="u-pull-right">
+					<% if @portfolio.picture.attached? %>
+						<%= image_tag url_for(@portfolio.picture), class: "mini-avatar u-pull-right" %>
+					<% end %>
+				</span>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="twelve columns">
+				<%= form.label :description %>
+				<%= form.text_area :description, class: "u-full-width" %>
+			</div>
+		</div>
+	</section>
+	
+	<section>
+		<h2>Samples</h2>
+		
+		<div id="samples">
+			<%= form.fields_for :samples do |f| %>
+				<%= render partial: "sample_fields", locals: {f: f} %>
+			<% end %>
+		</div>
+		
+		<div class="row">
+			<div class="ten columns force-height">
+			</div>
+				
+			<div class="two columns">
+				<%= link_to_add_association('Add Sample', form, :samples, :data => {"association-insertion-node": "#samples", "association-insertion-method": "append"}) %>
+			</div>
+		</div>
+		
+	</section>
+	
+	
+	<div class="actions">
+		<%= form.submit class: "button button-primary" %>
+	</div>
+<% end %>
